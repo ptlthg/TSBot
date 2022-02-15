@@ -75,8 +75,7 @@ client.on('messageCreate', async (message: Message) => {
 	const commandName = _commandName.toLowerCase();
 
 	const command: Command | undefined = commands.get(commandName);
-
-	if (!command) return;
+	if (!command || command.type !== CommandType.MESSAGE) return;
 
 	if (message.channel && !isValidAccess(command.access, message.channel.type)) return;
 
